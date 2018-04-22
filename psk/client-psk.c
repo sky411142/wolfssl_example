@@ -45,15 +45,48 @@ static inline unsigned int My_Psk_Client_Cb(WOLFSSL* ssl, const char* hint,
     (void)hint;
     (void)key_max_len;
 
-    /* identity is OpenSSL testing default for openssl s_client, keep same*/
-    strncpy(identity, "Client_identity", id_max_len);
+    if(hint != NULL)
+        printf("get hint[%s]\n",hint);
 
-    /* test key n hex is 0x1a2b3c4d , in decimal 439,041,101, we're using
-     * unsigned binary */
-    key[0] = 26;
-    key[1] = 43;
-    key[2] = 60;
-    key[3] = 77;
+    if(strncmp(hint, "wolfssl server", 14)==0)
+    {
+        /* identity is OpenSSL testing default for openssl s_client, keep same*/
+        strncpy(identity, "Client_identity", id_max_len);
+        printf("enter Client_identity\n");
+        /* test key n hex is 0x1a2b3c4d , in decimal 439,041,101, we're using
+         * unsigned binary */
+        key[0] = 26;
+        key[1] = 43;
+        key[2] = 60;
+        key[3] = 77;
+    }
+    else if(strncmp(hint, "wolfssl serve1", 14)==0)
+    {
+        /* identity is OpenSSL testing default for openssl s_client, keep same*/
+        strncpy(identity, "Client_identit1", id_max_len);
+        printf("enter Client_identit1\n");
+
+        /* test key n hex is 0x1a2b3c4d , in decimal 439,041,101, we're using
+         * unsigned binary */
+        key[0] = 26;
+        key[1] = 43;
+        key[2] = 60;
+        key[3] = 78;
+    }
+    else if(strncmp(hint, "wolfssl serve2", 14)==0)
+    {
+        /* identity is OpenSSL testing default for openssl s_client, keep same*/
+        strncpy(identity, "Client_identit2", id_max_len);
+        printf("enter Client_identit2\n");
+
+        /* test key n hex is 0x1a2b3c4d , in decimal 439,041,101, we're using
+         * unsigned binary */
+        key[0] = 26;
+        key[1] = 43;
+        key[2] = 60;
+        key[3] = 79;
+    }
+    
 
     return 4;
 }

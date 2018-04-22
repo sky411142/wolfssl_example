@@ -45,14 +45,31 @@ static unsigned int my_psk_server_cb(WOLFSSL* ssl, const char* identity,
     (void)ssl;
     (void)key_max_len;
 
-    if (strncmp(identity, "Client_identity", 15) != 0) {
-        return 0;
+    if (strncmp(identity, "Client_identity", 15) == 0) {
+        printf("enter Client_identity\n");
+
+        key[0] = 26;
+        key[1] = 43;
+        key[2] = 60;
+        key[3] = 77;
+    }
+    else if (strncmp(identity, "Client_identit1", 15) == 0) {
+        printf("enter Client_identit1\n");
+
+        key[0] = 26;
+        key[1] = 43;
+        key[2] = 60;
+        key[3] = 78;
+    }
+    else if (strncmp(identity, "Client_identit2", 15) == 0) {
+        printf("enter Client_identit2\n");
+
+        key[0] = 26;
+        key[1] = 43;
+        key[2] = 60;
+        key[3] = 79;
     }
 
-    key[0] = 26;
-    key[1] = 43;
-    key[2] = 60;
-    key[3] = 77;
 
     return 4;
 }
@@ -79,7 +96,7 @@ int main()
 
     /* use psk suite for security */
     wolfSSL_CTX_set_psk_server_callback(ctx, my_psk_server_cb);
-    wolfSSL_CTX_use_psk_identity_hint(ctx, "wolfssl server");
+    wolfSSL_CTX_use_psk_identity_hint(ctx, "wolfssl serve2");
     if (wolfSSL_CTX_set_cipher_list(ctx, "PSK-AES128-CBC-SHA256")
                                    != SSL_SUCCESS) {
         printf("Fatal error : server can't set cipher list\n");
